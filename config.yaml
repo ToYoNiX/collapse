@@ -1,0 +1,156 @@
+units:
+  kx: u
+  ky: u
+  px: 7
+  py: 7
+
+points:
+  key.padding: ky
+  zones:
+    matrix:
+      columns:
+        pinky:
+          key:
+            col_net: C0
+            spread: kx
+            stagger: 0
+        ring:
+          key:
+            col_net: C1
+            spread: kx
+            stagger: 0.42 ky
+        middle:
+          key:
+            col_net: C2
+            spread: kx
+            stagger: 0.28 ky
+        index:
+          key:
+            col_net: C3
+            spread: kx
+            stagger: -0.17 ky
+        inner:
+          key:
+            col_net: C4
+            spread: kx
+            stagger: -0.11 ky
+      rows:
+        top:
+          row_net: R0
+        home:
+          row_net: R1
+        bottom:
+          row_net: R2
+
+    thumbs:
+      anchor:
+        ref: matrix_inner_bottom
+        shift: [-1.3kx, -2.95 ky]
+      columns:
+        inner:
+          key:
+            spread: kx
+            splay: 0
+            origin: [-0.5 kx, -0.5 ky]
+            col_net: C2
+        home:
+          key:
+            spread: kx
+            splay: -15
+            origin: [-0.5 kx, -0.5 ky]
+            col_net: C3
+        outter:
+          key:
+            spread: kx
+            splay: -15
+            origin: [-0.5 kx, -0.5 ky]
+            col_net: C4
+      rows:
+        thumb:
+          row_net: R3
+
+outlines:
+  keycap:
+    - what: rectangle
+      where: /matrix|thumbs/
+      size: [kx - 1, ky - 1]
+
+  switch_cutouts:
+    - what: rectangle
+      where: /matrix|thumbs/
+      size: [14, 14]
+
+  plate_cutout:
+    - what: rectangle
+      where: /matrix|thumbs/
+      size: [kx + px, ky + py]
+      fillet: 1
+    - what: rectangle
+      size: [30, 25]
+      adjust:
+        shift: [28.9, -6]
+        rotate: -20
+      fillet: 1
+      operation: add
+  
+  mounting_holes:
+    - what: circle
+      where:
+        ref: matrix_pinky_top
+        shift: [9, 9.5]
+      radius: 1.6
+    - what: circle
+      where:
+        ref: matrix_pinky_bottom
+        shift: [9, -9.5]
+      radius: 1.6
+    - what: circle
+      where:
+        ref: matrix_ring_top
+        shift: [10, -16]
+      radius: 1.6
+    - what: circle
+      where:
+        ref: matrix_inner_bottom
+        shift: [-10, -7.4]
+      radius: 1.6
+    - what: circle
+      where:
+        ref: thumbs_outter_thumb
+        shift: [-11, 0]
+      radius: 1.6
+
+  bottom:
+    - what: outline
+      name: plate_cutout
+      operation: add
+    - what: rectangle
+      size: [23, 76]
+      adjust:
+        ref: matrix_inner_bottom
+        shift: [22, -25]
+      fillet: 1
+      operation: add
+    - what: outline
+      name: mounting_holes
+      operation: subtract
+
+  plate:
+    - what: outline
+      name: plate_cutout
+      operation: add
+    - what: outline
+      name: switch_cutouts
+      operation: subtract
+    - what: outline
+      name: mounting_holes
+      operation: subtract
+
+  front:
+    - what: outline
+      name: plate_cutout
+      operation: add
+    - what: outline
+      name: keycap
+      operation: subtract
+
