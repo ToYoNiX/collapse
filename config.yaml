@@ -154,3 +154,31 @@ outlines:
       name: keycap
       operation: subtract
 
+pcbs:
+  collapse:
+    template: kicad8
+    outlines:
+      edge:
+        outline: bottom
+    footprints:
+      mx_switches:
+        what: ceoloide/switch_mx
+        where: /matrix|thumbs/
+        params:
+          from: "{{col_net}}"
+          to: "{{row_net}}"
+  
+      encoder:
+        what: rotary_encoder_ec11_ec12
+        adjust:
+          ref: matrix_inner_bottom
+          shift: [23, -47]
+          rotate: 60
+
+      pro_micro:
+        what: promicro
+        where:
+          ref: matrix_inner_bottom
+          shift: [23, -6]
+          rotate: -90
+
